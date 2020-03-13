@@ -1,0 +1,47 @@
+.sidenav ul {
+  display: flex;
+  flex-direction: column;
+  margin-block-start: 0;
+  padding-inline-start: 0;
+}
+.sidenav li {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 60px;
+}
+.sidenav li > a {
+  margin-left: 1em;
+}
+.sidenav li:last-child {
+  display: none;
+}
+
+.active {
+  font-weight: bold;
+}
+
+.app-container.small .sidenav { display: auto; }
+.app-container.medium .sidenav { display: none; }
+
+/* Light Theme */
+.app-container.light {
+  .sidenav {
+    background-color: #EFEFEF;
+    color: #222222;
+  }
+  .sidenav li {
+    border-bottom: 1px solid #555555;
+  }
+}
+
+/* Dark Theme */
+.app-container.dark {
+  .sidenav {
+    background-color: #1e1e1e;
+    color: #FFFFFF;
+  }
+  .sidenav li {
+    border-bottom: 1px solid #EFEFEF;
+  }
+}

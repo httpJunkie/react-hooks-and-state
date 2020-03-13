@@ -1,0 +1,14 @@
+{
+	"Toggle_Complete Reducer Result": {
+		"scope": "javascript",
+		"prefix": "s07b",
+		"body": [
+			"state.map((item) =>",
+			"  item.id === action.id",
+			"    ? { ...item, complete: !item.complete }",
+			"    : item",
+			")"
+		],
+		"description": "Update Toggle_Complete reducer result"
+	}
+}
