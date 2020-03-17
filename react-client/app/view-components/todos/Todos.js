@@ -9,42 +9,48 @@ import * as constants from "./constants";
 import { todoReducer } from "./todoReducer";
 
 const initialState = constants.TODO_SEED;
-// 00: show how we are populating the grid using initialState
 
 const Todos = () => {
-  // 01: Add todo and textInput state
-  // 1b: Update Grid data source (Line 51)
-  // 02: Add completedTodos filter
+  const [todos, dispatch] = useReducer(todoReducer, initialState);
+  const [textInput, setTextInput] = useState('');
 
-  // 03: (Add OnChange)
-  // 04: (Add OnChange event to Input)
+  const completedTodos = todos.filter((todo) => todo.complete);
 
-  // 05: Add effect for document title
+  useEffect(() => {
+    document.title = `${completedTodos.length} completed to do's`;
+  });
   
   function addTodo(event) {
-    console.log(event) 
-    // 06: Prevent browser refresh
-    // 06: Add add_todo dispatch
-    // 06: reset setTextInput to nothing
+    event.preventDefault()
+    dispatch({
+      type: 'ADD_TODO',
+      name: textInput,
+      complete: false
+    });
+    setTextInput('');
   }
   function toggleComplete(id) {
-    // 07: Add toggle_complete dispatch
+    dispatch({ type: 'TOGGLE_COMPLETE', id });
   }
   function deleteTodo(id) {
-    // 08: Add delete_todos dispatch
+    dispatch({ type: 'DELETE_TODO', id });
   }
   function clearTodos() {
-    // 09: Add clear_todos dispatch
+    dispatch({ type: 'CLEAR_TODOS' });
   }
 
-  // 03: Add updateTextInput function
+  function updateTextInput(event) {
+    const value = event.target.value;
+    if (textInput !== value) {
+      setTextInput(value);
+    }
+  }
 
   return (
     <>
       <div className="todo-form">
         <form onSubmit={addTodo}>
-          {/* 04: Add OnChange event to Input */}
-          <Input type="search" placeholder="Enter task..." autoComplete="off" />
+          <Input onChange={updateTextInput} value={textInput} type="search" placeholder="Enter task..." autoComplete="off" />
           <Button onClick={e => addTodo(e)} look="bare" icon="plus" type="submit">
             Add To Do
           </Button>
@@ -52,7 +58,7 @@ const Todos = () => {
       </div>
       <div className="todo-container">
         {/* 1b: Change to todos */}
-        <Grid data={initialState} style={{ width: "100%", height: "100%" }}>
+        <Grid data={todos} style={{ width: "100%", height: "100%" }}>
           <Column field="name" title="Name" />
           <Column field="complete" title="Completed"
             cell={(props) => (

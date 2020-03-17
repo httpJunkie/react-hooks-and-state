@@ -1,7 +1,7 @@
 import React from 'react';
-import Counter from './Counter';
-// import CounterClass from './CounterClass';
-import DualCounter from './DualCounter';
+import Counter from '../partial-components/Counter';
+// import CounterClass from '../partial-components/CounterClass';
+import DualCounter from '../partial-components/DualCounter';
 
 const Home = () => {
   document.title = `Todo App Home`;
